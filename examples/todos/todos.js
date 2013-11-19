@@ -158,20 +158,16 @@ $(function(){
       this.allCheckbox.checked = !remaining;
     },
 
-    // Add a single todo item to the list by creating a view for it, and
-    // appending its element to the `<ul>`.
     addOne: function(todo) {
       var view = new TodoView({model: todo});
       this.$("#todo-list").append(view.render().el);
     },
 
-    // Add all items in the **Todos** collection at once.
+    // ???
     addAll: function() {
       Todos.each(this.addOne, this);
     },
 
-    // If you hit return in the main input field, create new **Todo** model,
-    // persisting it to *localStorage*.
     createOnEnter: function(e) {
       if (e.keyCode != 13) return;
       if (!this.input.val()) return;
@@ -180,12 +176,14 @@ $(function(){
       this.input.val('');
     },
 
-    // Clear all done todo items, destroying their models.
+    // invoke is an underscore API.
+    // Calls the method named by methodName on each value in the list.
     clearCompleted: function() {
       _.invoke(Todos.done(), 'destroy');
       return false;
     },
 
+    // checked is a javascript API which returns ture or false.
     toggleAllComplete: function () {
       var done = this.allCheckbox.checked;
       Todos.each(function (todo) { todo.save({'done': done}); });
@@ -193,7 +191,6 @@ $(function(){
 
   });
 
-  // Finally, we kick things off by creating the **App**.
   var App = new AppView();
 
 });
